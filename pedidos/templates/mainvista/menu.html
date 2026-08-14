@@ -1,0 +1,31 @@
+{% extends 'mainvista/base.html' %}
+
+{% block content %}
+<h2 class="mb-4">☕ Menú de la Cafetería</h2>
+
+<div class="row">
+    {% for producto in productos %}
+    <div class="col-md-4 mb-3">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.nombre }}</h5>
+                <p class="card-text text-muted">Categoría: {{ producto.get_categoria_display }}</p>
+                <h6 class="text-success">${{ producto.precio }}</h6>
+            </div>
+            <div class="card-footer bg-white border-top-0">
+                <form action="{% url 'crear_pedido' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="producto_id" value="{{ producto.id }}">
+                    <div class="input-group mb-2">
+                        <input type="text" name="cliente_nombre" class="form-control" placeholder="Tu nombre" required>
+                        <button type="submit" class="btn btn-primary">Ordenar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p>No hay productos registrados en el menú.</p>
+    {% endfor %}
+</div>
+{% endblock %}
