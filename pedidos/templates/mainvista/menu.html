@@ -7,6 +7,14 @@
     {% for producto in productos %}
     <div class="col-md-4 mb-3">
         <div class="card h-100 shadow-sm">
+            {% if producto.imagen %}
+                <img src="{{ producto.imagen.url }}" class="card-img-top" alt="{{ producto.nombre }}" style="height: 200px; object-fit: cover;">
+            {% else %}
+                <div class="bg-light text-center py-5 border-bottom">
+                    <span class="text-muted">Sin imagen</span>
+                </div>
+            {% endif %}
+
             <div class="card-body">
                 <h5 class="card-title">{{ producto.nombre }}</h5>
                 <p class="card-text text-muted">Categoría: {{ producto.get_categoria_display }}</p>
