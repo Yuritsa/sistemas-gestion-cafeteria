@@ -72,7 +72,8 @@ class ProductoAdmin(admin.ModelAdmin):
             'add' : True,
             'change' : False,
         }
-        return render(request, "admin/change_form.html", context)
+ #Aquí cambie el admin/change_form.html       
+        return render(request, "admin/csv_form.html", context)
 
 
 
